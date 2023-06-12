@@ -1,8 +1,12 @@
-name: Dependabot Dependency Alerter
+name: CI
 
 on:
+  push:
+    branches: main
   pull_request:
+    branches: [main, master]
     types: [opened, reopened, labeled, synchronize]
+  workflow_dispatch:
     
 permissions:
   pull-requests: write
@@ -10,26 +14,36 @@ permissions:
   issues: write
   
 jobs:
-  Dependabot-PR-Reviewer:
+  CI:
     runs-on: ubuntu-latest
-    if: ${{github.actor == 'dependabot[bot]'}}
     steps:
-      - name: Fetching Dependabot Metadata
+      - if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+        name: Fetching Dependabot Metadata
         id: metadata
         uses: dependabot/fetch-metadata@v1
         with:
           GITHUB-TOKEN: ${{secrets.TOKENIZED}}
           
-      - name: Assign PR to Reviewer
+      - name: Fetching Data for SonarCloud
+        uses: actions/checkout@v3
+        with:
+          fetch-data: 0
+          
+      - name: SonarCloud Analysis
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{secrets.TOKENIZED}}
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+        with:
+          args:
+            -Dsonar.projectKey=Majikjack620_senior-project
+            -Dsonar.organization=Majikjack620
+          
+      - if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+        name: Assign PR to Reviewer
         uses: pozil/auto-assign-issue@v1
         with:
           repo-token: ${{secrets.TOKENIZED}}
           assignees: Majikjack620
           numOfAssignee: 1
           allowSelfAssign: true
-          
-#       - name: Enabling Auto-merge for Dependabot PRs
-#         run: gh pr merge --auto --merge "$PR_URL" --delete-branch
-#         env:
-#           PR_URL: ${{github.event.pull_request.html_url}}
-#           GITHUB_TOKEN: ${{secrets.TOKENIZED}}
