@@ -13,6 +13,7 @@
 
     <mat-card-content id="reportsPDF" #reportsPDF *ngIf="reports.length > 0 && loading">
       <table mat-table [dataSource]="dataSource" matSort>
+        <caption>User Reports</caption>
 
         <ng-container matColumnDef="submittedAt">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
