@@ -33,7 +33,7 @@ updates:
       time: "10:00"
     labels:
       - "dependencies"
-      - "frontend"
+      - "backend"
       - "npm"
     allow:
       - dependency-type: "all"
