@@ -2,7 +2,7 @@ name: Dependabot Dependency Alerter
 
 on:
   pull_request:
-    types: [opened, reopened, labeled]
+    types: [opened, reopened, labeled, synchronize]
     
 permissions:
   pull-requests: write
@@ -21,10 +21,12 @@ jobs:
           GITHUB-TOKEN: ${{secrets.TOKENIZED}}
           
       - name: Assign PR to Reviewer
-        uses: rowi1de/auto-assign-review-teams@v1.1.3
+        uses: pozil/auto-assign-issue@v1.1.3
         with:
           repo-token: ${{secrets.TOKENIZED}}
-          persons: Majikjack620
+          assignees: Majikjack620
+          numOfAssignee: 1
+          allowSelfAssign: true
           
 #       - name: Enabling Auto-merge for Dependabot PRs
 #         run: gh pr merge --auto --merge "$PR_URL" --delete-branch
