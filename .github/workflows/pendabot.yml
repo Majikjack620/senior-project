@@ -1,0 +1,35 @@
+name: Dependabot Dependency Alerter
+
+on:
+  pull_request:
+    types: [opened, reopened, labeled]
+    
+permissions:
+  pull-requests: write
+  contents: write
+  issues: write
+  
+jobs:
+  Dependabot-PR-Reviewer:
+    runs-on: ubuntu-latest
+    if: ${{github.actor == 'dependabot[bot]'}}
+    steps:
+      - name: Fetching Dependabot Metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
+        with:
+          GITHUB-TOKEN: ${{secrets.TOKENIZED}}
+          
+      - name: Assign PR to Reviewer
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{secrets.TOKENIZED}}
+          assignees: Majikjack620
+          numOfAssignee: 1
+          allowSelfAssign: true
+          
+#       - name: Enabling Auto-merge for Dependabot PRs
+#         run: gh pr merge --auto --merge "$PR_URL" --delete-branch
+#         env:
+#           PR_URL: ${{github.event.pull_request.html_url}}
+#           GITHUB_TOKEN: ${{secrets.TOKENIZED}}
