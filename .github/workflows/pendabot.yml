@@ -31,10 +31,9 @@ jobs:
           
       - name: SonarCloud Analysis
         uses: SonarSource/sonarcloud-github-action@master
-        env:
+        with:
           GITHUB_TOKEN: ${{secrets.TOKENIZED}}
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
-        with:
           args:
             -Dsonar.projectKey=Majikjack620_senior-project
             -Dsonar.organization=majikjack620
