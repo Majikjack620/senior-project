@@ -37,7 +37,7 @@ jobs:
         with:
           args:
             -Dsonar.projectKey=Majikjack620_senior-project
-            -Dsonar.organization=Majikjack620
+            -Dsonar.organization=majikjack620
           
       - if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
         name: Assign PR to Reviewer
