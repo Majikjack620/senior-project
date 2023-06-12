@@ -27,7 +27,7 @@ jobs:
       - name: Fetching Data for SonarCloud
         uses: actions/checkout@v3
         with:
-          fetch-data: 0
+          fetch-depth: 0
           
       - name: SonarCloud Analysis
         uses: SonarSource/sonarcloud-github-action@master
