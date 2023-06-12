@@ -21,7 +21,7 @@ jobs:
           GITHUB-TOKEN: ${{secrets.TOKENIZED}}
           
       - name: Assign PR to Reviewer
-        uses: pozil/auto-assign-issue@v1.1.3
+        uses: pozil/auto-assign-issue@v1
         with:
           repo-token: ${{secrets.TOKENIZED}}
           assignees: Majikjack620
