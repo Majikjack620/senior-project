@@ -41,6 +41,7 @@ export class SigninComponent {
     console.log(this.signinForm);
     this.loading = false;
   }
+  
 // CREATES USER OBJECT AND HANDLE AUTHENTICATION AND CAN INFORM USERS OF INCORRECT PASSWORD AND OR EMAIL
   public signIn(): void {
     this.loading = true;

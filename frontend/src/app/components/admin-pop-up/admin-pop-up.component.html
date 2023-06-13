@@ -1,10 +1,12 @@
 <div class="container">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
 <!--TABLE FOR ADDING A REPORT, USES MAT-FORM FOR SIMPLICITY-->
     <h2 mat-dialog-title>Add Report</h2>
         <mat-dialog-content [formGroup]="projectForm">
             <table>
               <caption>Table detailing different projects going on.</caption>
+              
                 <tr>
                     <td style="padding-right: 15px; border-bottom: none;">
                         <mat-label><i class="fa fa-project-diagram"></i>  Project ID</mat-label>
@@ -34,6 +36,7 @@
             </table>
         </mat-dialog-content>
         <mat-dialog-actions class="actions">
+          
             <!--POP UP BUTTONS -->
             <div class="fa fa-spinner fa-pulse fa-fw" *ngIf="!loading" style="padding-right: 10px;"></div>
             <button mat-raised-button class="unfilled" mat-dialog-close (click)="close()">Cancel</button>

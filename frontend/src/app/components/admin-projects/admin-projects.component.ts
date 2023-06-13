@@ -43,6 +43,7 @@ export class AdminProjectsComponent implements AfterViewInit {
       this.user = {} as IUser;
       this.titleService.setTitle("Projects Overview | ROC Swaous");
   }
+
 //LISTENS FOR TRTIGGER AND SETS IP A TABLE FOR PROJECT DETAILS FROM AN API
   public ngAfterViewInit(): void {
     this.authService.getUser().then((user:any) => {
@@ -81,6 +82,7 @@ export class AdminProjectsComponent implements AfterViewInit {
 
     pdfMake.createPdf(docDefinition).open()
   }
+
 //ANIMATION FOR ADMIN POP-UP
   public addProject(): void {
     this.dialog.open(AdminPopUpComponent, {
@@ -88,6 +90,7 @@ export class AdminProjectsComponent implements AfterViewInit {
       panelClass: ['animate__animated', 'animate__fadeInDown']
     });
   }
+
 //IF THE USER ATTEMPTS TO REMOVE A PROJECT NOTIFY USER THAT PROJECT IS REMOVED
   public deleteProject(projectId: string, name: string): void {
     this.loading = true;

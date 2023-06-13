@@ -50,6 +50,7 @@ export class SignupComponent {
     console.log(this.signupForm, this.codeForm);
     this.loading = false;
   }
+
 //VALIDATION FOR PASSWORD IT READS AS THE PASSWORD AREA IS BEING CREATED AND MUST MEET THE REQUIREMENTS STATED IN SIGNUP.HTML
 //ONCE ALL ARE SET TO VALID IT ALLOWS CREATION OF THE PASSWORD FOR THE USER ACCOUNT.
   pswdCred() {
