@@ -60,7 +60,7 @@ jobs:
       - run: npm outdated >> update.txt
       
       - name: Save file
-        uses: action/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: updateThese
           path: output.txt
