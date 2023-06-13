@@ -60,7 +60,7 @@ jobs:
         run: |
           cd backend
           npm install
-          npm outdated >> output.txt
+          npm outdated package.json >> output.txt
       
       - name: Show file output
         run: |
