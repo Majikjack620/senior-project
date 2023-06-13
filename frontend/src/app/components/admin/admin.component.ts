@@ -43,7 +43,7 @@ export class AdminComponent implements AfterViewInit {
       this.user = {} as IUser;
       this.titleService.setTitle("Admin | ROC Swaous");
   }
-
+//CALL GETUSER AND SET ARRAYS FOR THE REPORTS
   public ngAfterViewInit(): void {
     this.authService.getUser().then((user:any) => {
       this.user = user.attributes;
@@ -72,7 +72,7 @@ export class AdminComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
+//CONTENTS FOR REPORT
   public export(): void {
     const doc = new jsPDF();
     const reportsPDF = this.reportsPDF.nativeElement;
@@ -81,7 +81,7 @@ export class AdminComponent implements AfterViewInit {
 
     pdfMake.createPdf(docDefinition).open()
   }
-
+//ANIMATION FOR REPORT POP-UP
   public viewReport(empId: string, reportId: string): void {
     this.dialog.open(ReportPopComponent, {
       width: "700px",

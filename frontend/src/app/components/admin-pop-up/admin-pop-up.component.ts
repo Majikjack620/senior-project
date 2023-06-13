@@ -18,7 +18,7 @@ export class AdminPopUpComponent implements OnInit {
   user: IUser;
   projects: any;
 
-
+//CONSTRUCTORS 
   constructor(private dialog: MatDialog, 
     private formBuilder: FormBuilder,
     private router: Router, 
@@ -38,7 +38,8 @@ export class AdminPopUpComponent implements OnInit {
 
     this.initForm();
   }
-
+  
+//SET FORUM ATRIBUTES TO REQUIRED AS WELL AS SETTING THE DATE IN FULL FORM
   initForm() {
     this.projectForm = this.formBuilder.group({
       projectId: ['', [Validators.required]],
@@ -51,6 +52,8 @@ export class AdminPopUpComponent implements OnInit {
     console.log(this.projectForm);
     this.loading = false;
   }
+
+//FOR SUBMITTED PROJECTS TAKE USER TO ADMIN PROJECTS AND IF NEEDED THROW AN ERROR
 
   public submitProject(projectData: any): void {
     this.apiService.createProject(projectData, this.user.sub).subscribe({

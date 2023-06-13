@@ -5,7 +5,9 @@
   
   <div *ngIf="loading" class="container">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  
+
+  <!--TABLE FOR ONGOING PROJECTS USES ANGULAR SERVICES TO INSERT THE INFORMATION INTO THE MAT TABLE-->
+
     <mat-card class="card" style="width: 90%;">
       <mat-card-header>
         <h1>Ongoing Projects</h1>
@@ -40,7 +42,9 @@
   
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
+
+  <!--DISPLAY IF THERE ARE NOT ANY REPORTS SUBMITTED OR IN PLACE-->
+
           <div *matNoDataRow>
               <td style=" font-size: 25px; text-align: center;"><b>No data with filter "{{input.value}}"</b></td>
               <td><img width="350" height="250" alt="EMPTY" src="../../../assets/RisenOneCat.gif" style="text-align: center;" /></td>
@@ -48,7 +52,7 @@
         </table>
   
         
-  
+  <!--BUTTONS FOR TABLE-->
         <div class="tableButtons">
           <mat-form-field style="padding-right: 2%;">
             <mat-label><i class="fa fa-filter"></i> Filter</mat-label>
@@ -62,6 +66,7 @@
         </div>
       </mat-card-content>
       
+      <!--PROMPT A USER WITH NO REPORTS TO ADD AND CREATE A PROJECT-->
       <mat-card-content *ngIf="projects.length == 0 && loading">
         <img style="display: block; margin: auto;" width="350" height="250" alt="EMPTY" src="../../../assets/RisenOneCat.gif" />
         <h3 style="text-align: center;">No ongoing projects, but you can add one by pressing the button below!</h3>

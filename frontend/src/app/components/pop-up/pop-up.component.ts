@@ -11,14 +11,14 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './pop-up.component.html',
   styleUrls: ['./pop-up.component.scss']
 })
-
+//VALUE SETTING
 export class PopUpComponent implements OnInit {
   reportForm: any;
   loading: boolean;
   user: IUser;
   projects: any;
 
-
+//CONSTRUCTOR DEFINITION FOR SET DEPENDENCIES AND INITILIZATION
   constructor(private dialog: MatDialog, 
     private formBuilder: FormBuilder,
     private router: Router, 
@@ -67,7 +67,7 @@ export class PopUpComponent implements OnInit {
       }
     })
   }
-
+//DATA FOR THE POP-UP FORM AND SETS THE PARAMATERS FOR SUBMITREPORT
   public submit(): void {
     this.loading = true;
     const params = {

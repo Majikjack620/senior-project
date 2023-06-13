@@ -44,6 +44,7 @@ export class AdminProjectsComponent implements AfterViewInit {
       this.titleService.setTitle("Projects Overview | ROC Swaous");
   }
 
+//LISTENS FOR TRTIGGER AND SETS IP A TABLE FOR PROJECT DETAILS FROM AN API
   public ngAfterViewInit(): void {
     this.authService.getUser().then((user:any) => {
       this.user = user.attributes;
@@ -82,6 +83,7 @@ export class AdminProjectsComponent implements AfterViewInit {
     pdfMake.createPdf(docDefinition).open()
   }
 
+//ANIMATION FOR ADMIN POP-UP
   public addProject(): void {
     this.dialog.open(AdminPopUpComponent, {
       width: "700px",
@@ -89,6 +91,7 @@ export class AdminProjectsComponent implements AfterViewInit {
     });
   }
 
+//IF THE USER ATTEMPTS TO REMOVE A PROJECT NOTIFY USER THAT PROJECT IS REMOVED
   public deleteProject(projectId: string, name: string): void {
     this.loading = true;
     this.apiService.deleteProject(this.user.sub, projectId).subscribe({

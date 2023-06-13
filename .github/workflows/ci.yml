@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: [main, master]
+    types: [opened, reopened, labeled, synchronize]
+  workflow_dispatch:
+    
+permissions:
+  pull-requests: write
+  contents: write
+  issues: write
+  
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetching Repo Data
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Dependency Check
+        uses: actions/dependency-review-action@v3
+        with:
+          fail-on-severity: moderate
+          
+      - name: SonarCloud Analysis
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args:
+            -Dsonar.projectKey=Majikjack620_senior-project
+            -Dsonar.organization=majikjack620
+          
+      - if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+        name: Assign PR to Reviewer
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{secrets.TOKENIZED}}
+          assignees: Majikjack620
+          numOfAssignee: 1
+          allowSelfAssign: true

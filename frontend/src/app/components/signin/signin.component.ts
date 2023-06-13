@@ -9,6 +9,8 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
+
+//SIGN IN CLASS WITH CONSTRUCTOR AND SETS AND INITILIZES PARAMATERS
 export class SigninComponent {
   signinForm: any;
   loading: boolean;
@@ -39,7 +41,8 @@ export class SigninComponent {
     console.log(this.signinForm);
     this.loading = false;
   }
-
+  
+// CREATES USER OBJECT AND HANDLE AUTHENTICATION AND CAN INFORM USERS OF INCORRECT PASSWORD AND OR EMAIL
   public signIn(): void {
     this.loading = true;
     this.user.email = this.signinForm.value.email;

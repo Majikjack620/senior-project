@@ -17,7 +17,7 @@ export class SignupComponent {
   hideCon: boolean;
   confirmed: boolean;
   user: IUser;
-
+//SIGNUP CONSTRUCTORS
   constructor(
     private formBuilder: FormBuilder, 
     private router: Router, 
@@ -34,7 +34,7 @@ export class SignupComponent {
   ngOnInit() {
     this.initForm();
   }
-
+//SETS NEEDED INFORMATION TO REQUIRED
   initForm() {
     this.signupForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -51,6 +51,8 @@ export class SignupComponent {
     this.loading = false;
   }
 
+//VALIDATION FOR PASSWORD IT READS AS THE PASSWORD AREA IS BEING CREATED AND MUST MEET THE REQUIREMENTS STATED IN SIGNUP.HTML
+//ONCE ALL ARE SET TO VALID IT ALLOWS CREATION OF THE PASSWORD FOR THE USER ACCOUNT.
   pswdCred() {
     //Declare variables connecting password characters to page
     var password = this.signupForm.value.pswd;
@@ -111,7 +113,7 @@ export class SignupComponent {
       this.loading = false;
     });
   }
-
+//METHOD FOR 2FA VALIDATION AND CATCHES AN ERROR IF THE 2FA CODE IS NO LONGER VALID OR WRONG
   public confirmUser(): void {
     this.loading = true;
     this.user.code = this.codeForm.value.code;

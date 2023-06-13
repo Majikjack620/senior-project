@@ -1,6 +1,8 @@
+<!--SIGN UP FORM-->
 <div class="container">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <mat-card *ngIf="!confirmed" class="card" style="width: 500px;">
+      <!--INFORMATION TO FILL OUT AS WELL AS THE ABILITY TO HIDE AND SHOW PASSWORD-->
       <h1>Create New Account</h1>
       <form [formGroup]="signupForm">
         <mat-label><i class="fa fa-user"></i> Full Name</mat-label>
@@ -18,7 +20,7 @@
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-
+<!--LISTS REQUIREMENTS FOR THE PASSWORD-->
         <h3>Password must:</h3>
         <div class="pswdCred">
             <p id="lower" class="invalid">Have at least <b>one (1) lowercase</b> letter</p>
@@ -27,7 +29,7 @@
             <p id="special" class="invalid">Have at least <b>one (1) special character</b> (  !"#$%&'()*+,-./:;<=>?@[\]^_`/|~)</p>
             <p id="length" class="invalid">Be minimum <b>eight (8) characters</b> long</p>
         </div>
-
+<!--REPEAT PASSWORD FOR CONFIRMATION-->
         <mat-label><i class="fa fa-key"></i>  Confirm Password</mat-label>
         <mat-form-field>
           <input [type]="hideCon ? 'password' : 'text'" id="confirmPswd" name="confirmPswd" matInput formControlName="confirmPswd" />
@@ -43,7 +45,7 @@
 
       <div class="fa fa-spinner fa-pulse fa-fw" *ngIf="loading" style="align-self: center; padding-top: 10px;"></div>
     </mat-card>
-
+<!--INFORMS USER ABOUT 2FA AND TO CHECK THEIR EMAIL WITH THEIR ACCOUNT WITH A VERIFICATION EMAIL-->
     <mat-card *ngIf="confirmed" class="card" style="width: 500px;">
       <h1>Confirm Account</h1>
       <form [formGroup]="codeForm">
