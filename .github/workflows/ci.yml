@@ -60,12 +60,8 @@ jobs:
         run: |
           cd backend
           npm install
-          npm outdated package.json >> output.txt
-      
-      - name: Show file output
-        run: |
           echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
-          cat output.txt >> $GITHUB_STEP_SUMMARY
+          npm outdated >> $GITHUB_STEP_SUMMARY
         
 
 
