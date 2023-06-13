@@ -22,7 +22,8 @@ jobs:
         with:
           fetch-depth: 0
           
-      - name: Dependency Check
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Dependency Check
         uses: actions/dependency-review-action@v3
         with:
           fail-on-severity: moderate
