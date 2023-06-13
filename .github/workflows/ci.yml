@@ -33,6 +33,7 @@ jobs:
         
       - if: ${{ github.event_name == 'pull_request' }}  
         name: Check for outdated dependencies
+        shell: bash {0}
         run: |
           cd backend
           npm install
