@@ -14,31 +14,11 @@ permissions:
   issues: write
   
 jobs:
-  CI:
+  Sonar-Analysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo Data
         uses: actions/checkout@v3
-          
-      
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: Set up node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
-          
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: Upgrade npm
-        run: npm i -g npm@7
-        
-      - if: ${{ github.event_name == 'pull_request' }}  
-        name: Check for outdated dependencies
-        run: |
-          set +x
-          cd backend
-          npm i
-          npm outdated
-        
         
       - name: SonarCloud Analysis
         uses: SonarSource/sonarcloud-github-action@master
@@ -49,12 +29,41 @@ jobs:
           args:
             -Dsonar.projectKey=Majikjack620_senior-project
             -Dsonar.organization=majikjack620
-          
-      - if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
-        name: Assign PR to Reviewer
+            
+  Dependabot-PR-Assigner:
+    runs-on: ubuntu-latest
+    if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+    steps:
+      - name: Assign PR to Reviewer
         uses: pozil/auto-assign-issue@v1
         with:
           repo-token: ${{secrets.TOKENIZED}}
           assignees: Majikjack620
           numOfAssignee: 1
           allowSelfAssign: true
+          
+  Dependency-Validator:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+          
+      - name: Upgrade npm
+        run: npm i -g npm@7
+        
+      - name: Check for outdated dependencies
+        run: cd backend
+      - run: npm i
+      - run: npm outdated
+      - run: npm outdated >> update.txt
+      
+      - name: Save file
+        uses: action/upload-artifact@v3
+        with:
+          name: updateThese
+          path: output.txt
+        
+          
+      
