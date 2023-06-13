@@ -57,7 +57,7 @@ jobs:
         run: npm i -g npm@latest
         
       - run: cd backend
-      - run: npm i
+      - run: npm i -g
       - run: npm outdated
       - run: npm outdated >> update.txt
       
