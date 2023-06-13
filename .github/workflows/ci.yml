@@ -26,21 +26,21 @@ jobs:
         name: Dependency Check
         uses: actions/dependency-review-action@v3
           
-#       - name: SonarCloud Analysis
-#         uses: SonarSource/sonarcloud-github-action@master
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
-#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#         with:
-#           args:
-#             -Dsonar.projectKey=Majikjack620_senior-project
-#             -Dsonar.organization=majikjack620
+      - name: SonarCloud Analysis
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args:
+            -Dsonar.projectKey=Majikjack620_senior-project
+            -Dsonar.organization=majikjack620
           
-#       - if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
-#         name: Assign PR to Reviewer
-#         uses: pozil/auto-assign-issue@v1
-#         with:
-#           repo-token: ${{secrets.TOKENIZED}}
-#           assignees: Majikjack620
-#           numOfAssignee: 1
-#           allowSelfAssign: true
+      - if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+        name: Assign PR to Reviewer
+        uses: pozil/auto-assign-issue@v1
+        with:
+          repo-token: ${{secrets.TOKENIZED}}
+          assignees: Majikjack620
+          numOfAssignee: 1
+          allowSelfAssign: true
