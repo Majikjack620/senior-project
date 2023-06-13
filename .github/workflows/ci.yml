@@ -59,8 +59,7 @@ jobs:
       - name: Check for outdated dependencies
         run: |
           cd backend
-          npm install -g package.json
-          npm outdated
+          npm outdated package.json
           npm outdated >> update.txt
       
       - name: Save file
