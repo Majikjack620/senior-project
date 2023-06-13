@@ -56,12 +56,10 @@ jobs:
       - name: Upgrade npm
         run: npm i -g npm@latest
         
-      - name: Check for outdated dependencies
-        run: |
-          cd backend
-          npm i
-          npm outdated
-          npm outdated >> update.txt
+      - run: cd backend
+      - run: npm i
+      - run: npm outdated
+      - run: npm outdated >> update.txt
       
       - name: Save file
         uses: actions/upload-artifact@v3
