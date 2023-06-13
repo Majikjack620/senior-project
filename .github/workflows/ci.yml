@@ -31,17 +31,9 @@ jobs:
         name: Upgrade npm
         run: npm install -g npm@7
         
-      - if: ${{ github.event_name == 'pull_request' }}
-        name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: senior-proj
-          path: backend/**
-          if-no-files-found: warn
-        
       - if: ${{ github.event_name == 'pull_request' }}  
         name: Check for outdated dependencies
-        run: cd /home/runner/work/senior-proj && npm install
+        run: cd backend && npm install
         
         
       - name: SonarCloud Analysis
