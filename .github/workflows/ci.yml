@@ -25,6 +25,22 @@ jobs:
         name: Dependency Check
         uses: actions/dependency-review-action@v3.0.6
           
+      
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+          
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Upgrade npm
+        run: npm install -g npm@7
+        
+      - if: ${{ github.event_name == 'pull_request' }}  
+        name: Check for outdated dependencies
+        run: npm outdated
+        
+        
       - name: SonarCloud Analysis
         uses: SonarSource/sonarcloud-github-action@master
         env:
