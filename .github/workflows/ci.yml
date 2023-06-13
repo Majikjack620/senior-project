@@ -25,18 +25,18 @@ jobs:
         name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "18"
           
       - if: ${{ github.event_name == 'pull_request' }}
         name: Upgrade npm
-        run: npm install -g npm@7
+        run: npm i -g npm@7
         
       - if: ${{ github.event_name == 'pull_request' }}  
         name: Check for outdated dependencies
-        shell: bash {0}
         run: |
+          set +x
           cd backend
-          npm install
+          npm i
           npm outdated
         
         
