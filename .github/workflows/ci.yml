@@ -10,7 +10,7 @@ on:
     
 permissions:
   pull-requests: write
-  contents: read
+  contents: write
   issues: write
   
 jobs:
@@ -19,9 +19,8 @@ jobs:
     steps:
       - name: Checkout Repo Data
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
           
+#       GITHUB ACTION FOR DEPENDENCY CHECKER. NOT WORKING CURRENTLY, ONLY RECOGNIZES WHEN DEPENDENCIES ARE CHANGED FROM ANOTHER SOURCE
       - if: ${{ github.event_name == 'pull_request' }}
         name: Dependency Check
         uses: actions/dependency-review-action@v3.0.6
