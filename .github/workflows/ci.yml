@@ -65,7 +65,7 @@ jobs:
       - name: Show file output
         run: |
           echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
-          echo output.txt >> $GITHUB_STEP_SUMMARY
+          cat output.txt >> $GITHUB_STEP_SUMMARY
         
 
 
