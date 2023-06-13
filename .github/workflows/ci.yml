@@ -41,7 +41,7 @@ jobs:
         
       - if: ${{ github.event_name == 'pull_request' }}  
         name: Check for outdated dependencies
-        run: cd /home/runner/work/backend && npm install
+        run: cd /home/runner/work/senior-proj && npm install
         
         
       - name: SonarCloud Analysis
