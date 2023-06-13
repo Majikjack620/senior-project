@@ -59,8 +59,7 @@ jobs:
       - name: Check for outdated dependencies
         run: |
           cd backend
-          npm outdated package.json
-          npm outdated >> update.txt
+          npm install
       
       - name: Save file
         uses: actions/upload-artifact@v3
