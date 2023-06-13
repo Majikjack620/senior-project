@@ -36,12 +36,12 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: senior-proj
-          path: backend
+          path: backend/**
           if-no-files-found: warn
         
       - if: ${{ github.event_name == 'pull_request' }}  
         name: Check for outdated dependencies
-        run: cd /home/runner/work/senior-project/backend && npm install
+        run: cd /home/runner/work/backend && npm install
         
         
       - name: SonarCloud Analysis
