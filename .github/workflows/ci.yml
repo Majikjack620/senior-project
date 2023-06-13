@@ -20,11 +20,6 @@ jobs:
       - name: Checkout Repo Data
         uses: actions/checkout@v3
           
-#       GITHUB ACTION FOR DEPENDENCY CHECKER. NOT WORKING CURRENTLY, ONLY RECOGNIZES WHEN DEPENDENCIES ARE CHANGED FROM ANOTHER SOURCE
-#       - if: ${{ github.event_name == 'pull_request' }}
-#         name: Dependency Check
-#         uses: actions/dependency-review-action@v3.0.6
-          
       
       - if: ${{ github.event_name == 'pull_request' }}
         name: Set up node
@@ -35,6 +30,14 @@ jobs:
       - if: ${{ github.event_name == 'pull_request' }}
         name: Upgrade npm
         run: npm install -g npm@7
+        
+      - if: ${{ github.event_name == 'pull_request' }}
+        name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: senior-proj
+          path: backend
+          if-no-files-found: warn
         
       - if: ${{ github.event_name == 'pull_request' }}  
         name: Check for outdated dependencies
