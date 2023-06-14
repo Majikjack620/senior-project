@@ -7,7 +7,7 @@ with open('dependent.txt', 'r') as file:
       if listings[i] == 'by':
         continue
       else:
-        if i == length-1:
+        if i == length-1 or listings[i] == "Depended":
           print(f'| {listings[i]}', end=" | \n")
         else:
           print(f'| {listings[i]}', end=" ")
