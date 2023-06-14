@@ -58,10 +58,9 @@ jobs:
         with:
           python-version: "3.10"
           
-      - name: Upgrade npm and pip/Install dependencies
+      - name: Upgrade npm and install dependencies
         run: |
           npm i -g npm@latest
-          pip install --upgrade pip
           cd backend
           npm install
       
