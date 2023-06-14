@@ -12,4 +12,4 @@ with open('dependent.txt', 'r') as file:
         else:
           print(sep[i], end=" | ")
 
-    print("| - | - | - | - | - | - |")
+    print("| - | - | - | - | - | - | - |")
