@@ -1,6 +1,4 @@
 with open('dependent.txt', 'r') as file:
-  first_line = file.readline()
-  
   for line in file:
     sep = list(line.split())
     length = len(sep)
@@ -14,5 +12,4 @@ with open('dependent.txt', 'r') as file:
         else:
           print(sep[i], end=" | ")
           
-    if line == first_line:
-      print("| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |")
+    print("| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |")
