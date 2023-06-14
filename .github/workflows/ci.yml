@@ -61,4 +61,4 @@ jobs:
           cd backend
           npm install
           echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
-          npm outdated & >> $GITHUB_STEP_SUMMARY
+          npm outdated $GITHUB_STEP_SUMMARY & >> 
