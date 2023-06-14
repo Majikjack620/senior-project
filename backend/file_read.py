@@ -11,3 +11,5 @@ with open('dependent.txt', 'r') as file:
           print(sep[i], end=" | \n")
         else:
           print(sep[i], end=" | ")
+
+    print("| --------------------------------------------------------------------------------- |")
