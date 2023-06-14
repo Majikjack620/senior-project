@@ -55,13 +55,12 @@ jobs:
           
       - name: Upgrade npm
         run: npm i -g npm@latest
-        
-      - run: cd backend
       
       - name: Check dependencies
         run: |
+          cd backend
           npm install package.json
-          npm audit
+          npm audit &
           
       - run: echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
         
