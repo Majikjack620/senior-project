@@ -10,4 +10,4 @@ with open('dependent.txt', 'r') as file:
         if i == length-1:
           print(f'| {listings[i]}', end=" | \n")
         else:
-          print(f'| {listings[i]}')
+          print(f'| {listings[i]}', end=" ")
