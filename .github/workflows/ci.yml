@@ -58,17 +58,23 @@ jobs:
         with:
           python-version: "3.10"
           
-      - name: Upgrade npm
-        run: npm i -g npm@latest
+      - name: Upgrade npm and pip/Install dependencies
+        run: |
+          npm i -g npm@latest
+          pip install --upgrade pip
+          cd backend
+          npm install
       
       - name: Check dependencies
         run: |
           cd backend
-          npm install
+          npm outdated &
           npm outdated >> dependent.txt &
+          echo
         
       - name: Making readable list
         run: |
           cd backend
-          echo "OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
+          echo "### :small_red_triangle: OUTDATED/MISSING Dependencies List :small_red_triangle:" >> $GITHUB_STEP_SUMMARY
+          echo " -------------------------------------------------------------------------------- "
           python file_read.py >> $GITHUB_STEP_SUMMARY
