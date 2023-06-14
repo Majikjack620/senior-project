@@ -68,6 +68,6 @@ jobs:
         run: |
           cd backend
           npm outdated &
-          npm outdated >> dependent.txt
+          npm outdated >> dependent.txt &
           echo "### :small_red_triangle: OUTDATED/MISSING Dependencies List :small_red_triangle:" >> $GITHUB_STEP_SUMMARY
           python file_read.py >> $GITHUB_STEP_SUMMARY
