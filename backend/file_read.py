@@ -4,9 +4,12 @@ with open('dependent.txt', 'r') as file:
     length = len(sep)
     
     for i in range(length):
-      if i == length-1:
-        print(sep[i], end=" | \n")
+      if sep[i] == "by":
+        continue
       else:
-        print(sep[i], end=" | ")
+        if i == length-1 or sep[i] == "Depended":
+          print(sep[i], end=" | \n")
+        else:
+          print(sep[i], end=" | ")
 
     print("| - | - | - | - | - | - |")
