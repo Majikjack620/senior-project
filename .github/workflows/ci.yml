@@ -69,5 +69,6 @@ jobs:
         
       - name: Making readable list
         run: |
+          cd backend
           echo "OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
           python file_read.py >> $GITHUB_STEP_SUMMARY
