@@ -8,6 +8,6 @@ with open('dependent.txt', 'r') as file:
         continue
       else:
         if i == length-1:
-          print(listings[i], end=" | \n")
+          print(f'| {listings[i]}', end=" | \n")
         else:
-          print(listings[i], end=" | ")
+          print(f'| {listings[i]}')
