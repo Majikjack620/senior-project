@@ -6,10 +6,11 @@ with open('dependent.txt', 'r') as file:
     for i in range(length):
       if sep[i] == "by":
         continue
+        
       else:
         if i == length-1 or sep[i] == "Depended":
           print(sep[i], end=" | \n")
         else:
           print(sep[i], end=" | ")
 
-    print("| - | - | - | - | - | - |")
+    # print("| - | - | - | - | - | - |")
