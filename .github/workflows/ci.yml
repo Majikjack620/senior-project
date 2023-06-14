@@ -59,7 +59,7 @@ jobs:
       - name: Check dependencies
         run: |
           cd backend
-          npm install package.json
+          npm install
           npm audit &
           
       - run: echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
