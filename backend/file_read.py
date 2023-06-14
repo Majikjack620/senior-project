@@ -1,18 +1,18 @@
 with open('dependent.txt', 'r') as file:
-  first_line = file.readline().strip("\n")
+  first_line = file.readline()
   
   for line in file:
-    listings = list(line.split())
-    length = len(listings)
+    sep = list(line.split())
+    length = len(sep)
     
     for i in range(length):
-      if listings[i] == "by":
+      if sep[i] == "by":
         continue
       else:
         if i == length-1:
-          print(listings[i], end=" | \n")
+          print(sep[i], end=" | \n")
         else:
-          print(listings[i], end=" | ")
+          print(sep[i], end=" | ")
           
     if line == first_line:
       print("| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |")
