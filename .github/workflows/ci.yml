@@ -56,12 +56,10 @@ jobs:
       - name: Upgrade npm
         run: npm i -g npm@latest
         
-      - name: Check for outdated dependencies
-        run: |
-          cd backend
-          npm install
-          npm outdated
-          echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
+      - run: cd backend
+      - run: npm install
+      - run: npm outdated
+      - run: echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
         
 
 
