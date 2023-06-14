@@ -5,6 +5,6 @@ with open('dependent.txt', 'r') as file:
     
     for i in range(length):
       if i == length-1:
-        print(f'| {listings[i]}', end=" | \n")
+        print(listings[i], end=" | \n")
       else:
-        print(f'| {listings[i]}', end=" ")
+        print(listings[i], end=" | ")
