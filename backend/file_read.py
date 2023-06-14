@@ -4,10 +4,7 @@ with open('dependent.txt', 'r') as file:
     length = len(listings)
     
     for i in range(length):
-      if listings[i] == 'by':
-        continue
+      if i == length-1:
+        print(f'| {listings[i]}', end=" | \n")
       else:
-        if i == length-1 or listings[i] == "Depended":
-          print(f'| {listings[i]}', end=" | \n")
-        else:
-          print(f'| {listings[i]}', end=" ")
+        print(f'| {listings[i]}', end=" ")
