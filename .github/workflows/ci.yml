@@ -54,14 +54,14 @@ jobs:
           node-version: "18"
           
       - name: Upgrade npm
-        run: npm i -g npm@latest
+        run: npm i -g npm@7
         
       - run: cd backend
       
       - name: Check dependencies
         run: |
           npm install package.json
-          npm outdated package.json
+          npm outdated
           
       - run: echo "### OUTDATED/MISSING Dependencies List:" >> $GITHUB_STEP_SUMMARY
         
