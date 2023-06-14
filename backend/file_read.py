@@ -11,6 +11,6 @@ file.close()
 
 for i in range(len(wordList)):
   if i % 7 == 0:
-    print(f'\n{wordList[i]}\t')
+    print(f'\n{wordList[i]}', end='\t')
   else:
-    print(f'{wordList[i]}\t')
+    print(f'{wordList[i]}', end='\t')
