@@ -10,7 +10,7 @@ with open('dependent.txt', 'r') as file:
 file.close()
 
 for i in range(len(wordList)):
-  if i % 7 == 0:
-    print(f'\n{wordList[i]}', end='\t')
+  if i % 5 == 0:
+    print(f'\n{wordList[i]}', end='\t\t\t\t')
   else:
-    print(f'{wordList[i]}', end='\t')
+    print(f'{wordList[i]}', end='\t\t\t\t')
