@@ -61,16 +61,15 @@ jobs:
       - name: Upgrade npm and install dependencies
         run: |
           npm i -g npm@latest
+          npm i -g npm-check-updates
           cd backend
           npm install
       
       - name: Check dependencies
         run: |
           cd backend
-          npm outdated &
-          npm outdated >> dependent.txt &
+          ncu --format group >> dependent.txt
       - name: Complete Summary
         run: |
           cd backend
-          echo "### :small_red_triangle: OUTDATED/MISSING Dependencies List :small_red_triangle:" >> $GITHUB_STEP_SUMMARY
           python file_read.py >> $GITHUB_STEP_SUMMARY
