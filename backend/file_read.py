@@ -45,19 +45,17 @@ with open('dependent.txt', 'r') as depend:
     print("- Go inside the folder with the ***package.json*** file from your CLI")
     print("- Run the following command in your CLI to update all dependencies:")
     print("  - ***npm update***")
+
+    content = checker.read()
+    
+    # Print a line
+    print("##")
+
+    # Check for major updates
+    if 'Major' in content:
+      print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
+
+    # Check for minor updates
+    if 'Minor' in content:
+      print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
 depend.close()
-
-# Open file that indicates major/minor upates
-# with open('check_major_minor.txt', 'r') as checker:
-#   content = checker.read()
-
-  # # Print a line
-  # print("##")
-
-  # # Check for major updates
-  # if 'Major' in content:
-  #   print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
-
-  # # Check for minor updates
-  # if 'Minor' in content:
-  #   print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
