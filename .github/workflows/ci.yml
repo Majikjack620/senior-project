@@ -65,18 +65,22 @@ jobs:
           cd backend
           npm install
       
-      - name: Check dependencies
+      - name: Check for outdatead dependencies
         run: |
           cd backend
           ncu --format group
           ncu --format group >> dependent.txt
+          python file_read.py >> $GITHUB_STEP_SUMMARY
           
-      - name: Complete Summary
+      - if: ${{github.event_name == 'pull_request'}}
+        name: Summarizing outdated dependency list
         run: |
           cd backend
-          python file_read.py >> $GITHUB_STEP_SUMMARY
           python file_read.py >> comments.txt
           gh pr comment "$PR_URL" --body-file comments.txt
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          
+      - name: Pass/Fail Check
+        run: python check_pass_fail.py
