@@ -48,8 +48,8 @@ with open('dependent.txt', 'r') as depend:
 depend.close()
 
 # Open file that indicates major/minor upates
-with open('check_major_minor.txt', 'r') as checker:
-  content = checker.read()
+# with open('check_major_minor.txt', 'r') as checker:
+#   content = checker.read()
 
   # # Print a line
   # print("##")
