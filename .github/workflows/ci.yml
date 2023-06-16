@@ -68,8 +68,15 @@ jobs:
       - name: Check dependencies
         run: |
           cd backend
+          ncu --format group
           ncu --format group >> dependent.txt
+          
       - name: Complete Summary
         run: |
           cd backend
           python file_read.py >> $GITHUB_STEP_SUMMARY
+          python file_read.py >> comments.txt
+          gh pr comment "$PR_URL" --body-file comments.txt
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

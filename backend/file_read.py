@@ -21,13 +21,11 @@ with open('dependent.txt', 'r') as depend:
 
         # If it is the last word in the line, advance to next line after printing
         if i == length-1:
-          print(listings[i], end=" | \n")
+          print(listings[i])
 
         # All other words will be printed as is with a '|' to make a table
         else:
-          print(listings[i], end=" | ")
-
-      print("| - | - | - | - | - | - |")
+          print(listings[i], end=" ")
 
     # Instructions outlining how to update outdated dependencies
     print("##")
@@ -50,16 +48,16 @@ with open('dependent.txt', 'r') as depend:
 depend.close()
 
 # Open file that indicates major/minor upates
-with open('check_major_minor.txt', 'r') as checker:
-  content = checker.read()
+# with open('check_major_minor.txt', 'r') as checker:
+#   content = checker.read()
 
-  # Print a line
-  print("##")
+  # # Print a line
+  # print("##")
 
-  # Check for major updates
-  if 'Major' in content:
-    print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
+  # # Check for major updates
+  # if 'Major' in content:
+  #   print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
 
-  # Check for minor updates
-  if 'Minor' in content:
-    print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
+  # # Check for minor updates
+  # if 'Minor' in content:
+  #   print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
