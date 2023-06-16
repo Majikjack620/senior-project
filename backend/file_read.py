@@ -46,7 +46,7 @@ with open('dependent.txt', 'r') as depend:
     print("- Run the following command in your CLI to update all dependencies:")
     print("  - ***npm update***")
 
-    content = checker.read()
+    content = depend.read()
     
     # Print a line
     print("##")
