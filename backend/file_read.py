@@ -21,13 +21,11 @@ with open('dependent.txt', 'r') as depend:
 
         # If it is the last word in the line, advance to next line after printing
         if i == length-1:
-          print(listings[i], end=" | \n")
+          print(listings[i], end="\n")
 
         # All other words will be printed as is with a '|' to make a table
         else:
-          print(listings[i], end=" | ")
-
-      print("| - | - | - | - | - | - |")
+          print(listings[i], end=" ")
 
     # Instructions outlining how to update outdated dependencies
     print("##")
