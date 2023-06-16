@@ -47,17 +47,17 @@ with open('dependent.txt', 'r') as depend:
     print("  - ***npm update***")
 depend.close()
 
-# Open file that indicates major/minor upates
-# with open('check_major_minor.txt', 'r') as checker:
-#   content = checker.read()
+# Open file again for clean reading
+with open('dependent.txt', 'r') as depend:
+  content = depend.read()
+    
+  # Print a line
+  print("##")
 
-  # # Print a line
-  # print("##")
+  # Check for major updates
+  if 'Major' in content:
+    print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
 
-  # # Check for major updates
-  # if 'Major' in content:
-  #   print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
-
-  # # Check for minor updates
-  # if 'Minor' in content:
-  #   print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
+  # Check for minor updates
+  if 'Minor' in content:
+    print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
