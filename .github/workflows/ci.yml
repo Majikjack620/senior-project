@@ -10,8 +10,8 @@ on:
     
 permissions:
   pull-requests: write
-  contents: write
-  issues: write
+  contents: read
+  issues: read
   
 jobs:
   Sonar-Analysis:
