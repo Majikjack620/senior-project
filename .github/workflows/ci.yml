@@ -83,4 +83,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           
       - name: Pass/Fail Check
-        run: python check_pass_fail.py
+        run: |
+          cd backend
+          python check_pass_fail.py
