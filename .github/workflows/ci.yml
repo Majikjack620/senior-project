@@ -57,9 +57,7 @@ jobs:
             rm zetasql-formatter_linux_x86_64.zip
             
         - name: Check SQL Format
-          uses: yoheikikuta/sql-autoformat-action@v1.0.2
-          with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          uses: credfeto/action-sql-format@1.4.1
 
 #   Semantic-Release:
 #     runs-on: ubuntu-latest
