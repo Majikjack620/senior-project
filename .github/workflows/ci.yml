@@ -33,6 +33,7 @@ jobs:
   Semantic-Release:
     runs-on: ubuntu-latest
     permissions:
+      pull-requests: write
       contents: write
       issues: write
     steps:
@@ -42,6 +43,7 @@ jobs:
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
         with:
+          semantic-version: 21.0.7
           branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
