@@ -25,7 +25,7 @@ jobs:
           id: action_black
           
         - name: Create PR if formatting errors
-          if: steps.actions_black.outputs.is_formatted == 'true'
+          if: steps.action_black.outputs.is_formatted == 'true'
           uses: peter-evans/create-pull-request@v3
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
