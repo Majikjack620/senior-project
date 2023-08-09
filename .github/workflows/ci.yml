@@ -33,6 +33,9 @@ jobs:
   Semantic-Release:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo Data
+        uses: actions/checkout@v3
+        
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
         env:
