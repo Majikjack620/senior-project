@@ -49,17 +49,21 @@ jobs:
       steps:
         - name: Checkout Repo
           uses: actions/checkout@v3
-        
-        - name: Install zetasql
-          run: |
-            wget https://github.com/Matts966/zetasql-formatter/releases/latest/download/zetasql-formatter_linux_x86_64.zip
-            sudo unzip zetasql-formatter_linux_x86_64.zip -d /usr/local/bin
-            rm zetasql-formatter_linux_x86_64.zip
             
         - name: Check SQL Format
-          uses: yoheikikuta/sql-autoformat-action@v1.0.2
+          uses: credfeto/action-sql-format@v1.4.1
+          
+        - name: Apply SQL Format Changes
+          if: ${{ github.event_name == 'pull_request' }}
+          uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            commit_message: "Reformat SQL Files to common format"
+            file_pattern: "*.sql"
+            commit_user_name: "sqlfmt[bot]"
+            commit_user_email: "github-username@users.noreply.github.com"
+            commit_author: "sqlfmt[bot] <github-username@users.noreply.github.com>"
+            skip_dirty_check: false
+          
 
 #   Semantic-Release:
 #     runs-on: ubuntu-latest
