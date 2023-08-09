@@ -29,60 +29,68 @@ jobs:
           args:
             -Dsonar.projectKey=Majikjack620_senior-project
             -Dsonar.organization=majikjack620
-            
-  Dependabot-PR-Assigner:
-    runs-on: ubuntu-latest
-    if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
-    steps:
-      - name: Assign PR to Reviewer
-        uses: pozil/auto-assign-issue@v1
-        with:
-          repo-token: ${{secrets.TOKENIZED}}
-          assignees: Majikjack620
-          numOfAssignee: 1
-          allowSelfAssign: true
-          
-  Dependency-Validator:
+
+  Semantic-Release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo Data
-        uses: actions/checkout@v3
-        
-      - name: Set up node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          
-      - name: Set up python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-          
-      - name: Upgrade npm and install dependencies
-        run: |
-          npm i -g npm@latest
-          npm i -g npm-check-updates
-          cd backend
-          npm install
-      
-      - name: Check for outdatead dependencies
-        run: |
-          cd backend
-          ncu --format group
-          ncu --format group >> dependent.txt
-          python file_read.py >> $GITHUB_STEP_SUMMARY
-          
-      - if: ${{github.event_name == 'pull_request'}}
-        name: Summarizing outdated dependency list
-        run: |
-          cd backend
-          python file_read.py >> comments.txt
-          gh pr comment "$PR_URL" --body-file comments.txt
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
+  # Dependabot-PR-Assigner:
+  #   runs-on: ubuntu-latest
+  #   if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+  #   steps:
+  #     - name: Assign PR to Reviewer
+  #       uses: pozil/auto-assign-issue@v1
+  #       with:
+  #         repo-token: ${{secrets.TOKENIZED}}
+  #         assignees: Majikjack620
+  #         numOfAssignee: 1
+  #         allowSelfAssign: true
           
-      - name: Pass/Fail Check
-        run: |
-          cd backend
-          python check_pass_fail.py
+  # Dependency-Validator:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Repo Data
+  #       uses: actions/checkout@v3
+        
+  #     - name: Set up node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "18"
+          
+  #     - name: Set up python
+  #       uses: actions/setup-python@v4
+  #       with:
+  #         python-version: "3.10"
+          
+  #     - name: Upgrade npm and install dependencies
+  #       run: |
+  #         npm i -g npm@latest
+  #         npm i -g npm-check-updates
+  #         cd backend
+  #         npm install
+      
+  #     - name: Check for outdatead dependencies
+  #       run: |
+  #         cd backend
+  #         ncu --format group
+  #         ncu --format group >> dependent.txt
+  #         python file_read.py >> $GITHUB_STEP_SUMMARY
+          
+  #     - if: ${{github.event_name == 'pull_request'}}
+  #       name: Summarizing outdated dependency list
+  #       run: |
+  #         cd backend
+  #         python file_read.py >> comments.txt
+  #         gh pr comment "$PR_URL" --body-file comments.txt
+  #       env:
+  #         PR_URL: ${{github.event.pull_request.html_url}}
+  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          
+  #     - name: Pass/Fail Check
+  #       run: |
+  #         cd backend
+  #         python check_pass_fail.py
