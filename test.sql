@@ -1,1 +1,5 @@
-SELECT game, mode, money FROM halo_comp WHERE game == "CTF"
+SELECT game,
+       MODE,
+       MONEY
+FROM halo_comp
+WHERE game == "CTF"
