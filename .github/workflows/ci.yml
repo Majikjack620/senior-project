@@ -10,41 +10,53 @@ on:
     
 permissions:
   pull-requests: write
-  contents: read
-  issues: read
+  contents: write
+  issues: write
   
 jobs:
-  Sonar-Analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+    Black-Formatter:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v3
         
-      - name: SonarCloud Analysis
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args:
-            -Dsonar.projectKey=Majikjack620_senior-project
-            -Dsonar.organization=majikjack620
+        - name: Black Formatter Review
+          uses: datadog/action-py-black-formatter@v2.1
+          id: action_black
+          
+        - name: Share Changes
+          if: steps.action_black.outputs.is_formatted == 'true'
+          uses: reviewdog/action-suggester@v1
+          with:
+            tool_name: blkfmt
 
-  Semantic-Release:
-    permissions:
-      pull-requests: write
-      contents: write
-      issues: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+#   Semantic-Release:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Repo
+#         uses: actions/checkout@v3
         
-      - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
+#       - name: Semantic Release
+#         uses: cycjimmy/semantic-release-action@v3
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+#   Sonar-Analysis:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Repo
+#         uses: actions/checkout@v3
+        
+#       - name: SonarCloud Analysis
+#         uses: SonarSource/sonarcloud-github-action@master
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         with:
+#           args:
+#             -Dsonar.projectKey=Majikjack620_senior-project
+#             -Dsonar.organization=majikjack620
+
   # Dependabot-PR-Assigner:
   #   runs-on: ubuntu-latest
   #   if: ${{github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
