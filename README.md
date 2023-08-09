@@ -21,7 +21,7 @@ This project was developed with Angular for both frontend and AWS (IAM, API Gate
 
 Base URL: http://risen-one-consulting-dev-serverlessdeploymentbuck-1pvofqrnrgpcu.s3-website-us-east-1.amazonaws.com/
 
-### Authors
+### Authorers
 
 Dakota Reid,
 Jackson Boster,
