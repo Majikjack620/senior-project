@@ -32,6 +32,9 @@ jobs:
 
   Semantic-Release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
     steps:
       - name: Checkout Repo Data
         uses: actions/checkout@v3
