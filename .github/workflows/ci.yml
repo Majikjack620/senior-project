@@ -11,6 +11,7 @@ on:
 permissions:
   pull-requests: write
   contents: write
+  checks: write
   issues: write
   
 jobs:
@@ -49,18 +50,16 @@ jobs:
         - name: Checkout Repo
           uses: actions/checkout@v3
         
+        - name: Install zetasql
+          run: |
+            wget https://github.com/Matts966/zetasql-formatter/releases/latest/download/zetasql-formatter_linux_x86_64.zip
+            sudo unzip zetasql-formatter_linux_x86_64.zip -d /usr/local/bin
+            rm zetasql-formatter_linux_x86_64.zip
+            
         - name: Check SQL Format
-          uses: yu-iskw/actions-sqlfluff@v3
-          id: action_sql
+          uses: yoheikikuta/sql-autoformat-action@v1
           with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            reporter: sql-pr-reviewer
-            sqlfluff_version: "2.0.7"
-            sqlfluff_command: "fix"
-            config: "${{ github.workspace }}/.sqlfluff"
-            paths: "${{ github.workspace }}/models"
-          
-        - name: Create PR if formatting errors
+            ${{ secrets.github_token }}
 
 #   Semantic-Release:
 #     runs-on: ubuntu-latest
