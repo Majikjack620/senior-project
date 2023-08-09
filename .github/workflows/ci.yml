@@ -15,34 +15,34 @@ permissions:
   issues: write
   
 jobs:
-#     Black-Formatter:
-#       runs-on: ubuntu-latest
-#       steps:
-#         - name: Checkout Repo
-#           uses: actions/checkout@v3
+    Black-Formatter:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v3
         
-#         - name: Black Formatter Review
-#           uses: datadog/action-py-black-formatter@v2.1
-#           id: action_black
+        - name: Black Formatter Review
+          uses: datadog/action-py-black-formatter@v2.1
+          id: action_black
           
-#         - name: Create PR if formatting errors
-#           if: steps.action_black.outputs.is_formatted == 'true'
-#           uses: peter-evans/create-pull-request@v3
-#           with:
-#             token: ${{ secrets.GITHUB_TOKEN }}
-#             title: "Format Python Code with psf/black for Clearer Readability"
-#             commit-message: ":art: Formatting Python code with psf/black" 
-#             body: |
-#               "There appear to be some python formatting errors in ${{ github.sha }}. 
-#               Uses the [psf/black](https://github.com/psf/black) formatter to fix these issues."
-#             base: ${{ github.head_ref }}
-#             branch: actions/black_formatter
+        - if: steps.action_black.outputs.is_formatted == 'true'
+          name: Create PR if formatting errors
+          uses: peter-evans/create-pull-request@v3
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            title: "Format Python Code with psf/black for Clearer Readability"
+            commit-message: ":art: Formatting Python code with psf/black" 
+            body: |
+              "There appear to be some python formatting errors in ${{ github.sha }}. 
+              Uses the [psf/black](https://github.com/psf/black) formatter to fix these issues."
+            base: ${{ github.head_ref }}
+            branch: actions/black_formatter
           
-#         - name: Share Changes
-#           if: steps.action_black.outputs.is_formatted == 'true'
-#           uses: reviewdog/action-suggester@v1
-#           with:
-#             tool_name: blkfmt
+        - name: Share Changes
+          if: steps.action_black.outputs.is_formatted == 'true'
+          uses: reviewdog/action-suggester@v1
+          with:
+            tool_name: blkfmt
             
     SQL-Formatter:
       runs-on: ubuntu-latest
@@ -59,22 +59,19 @@ jobs:
           with:
             commit_message: "Reformat SQL Files to common format"
             file_pattern: "*.sql"
-            commit_user_name: "sqlfmt[bot]"
-            commit_user_email: "github-username@users.noreply.github.com"
-            commit_author: "sqlfmt[bot] <github-username@users.noreply.github.com>"
             skip_dirty_check: false
           
 
-#   Semantic-Release:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout Repo
-#         uses: actions/checkout@v3
-        
-#       - name: Semantic Release
-#         uses: cycjimmy/semantic-release-action@v3
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    Semantic-Release:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v3
+
+        - name: Semantic Release
+          uses: cycjimmy/semantic-release-action@v3
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
 #   Sonar-Analysis:
 #     runs-on: ubuntu-latest
