@@ -13,7 +13,8 @@
           { "type": "perf", "release": "patch" },
           { "type": "refactor", "release": "patch" },
           { "type": "test", "release": false }
-        }
+        ]
+      }
     ],
     "@semantic-release/release-notes-generator",
     "@semantic-release/github"
