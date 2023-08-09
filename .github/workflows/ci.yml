@@ -53,8 +53,8 @@ jobs:
         - name: Check SQL Format
           uses: credfeto/action-sql-format@v1.4.1
           
-        - if: ${{ github.event_name == 'pull_request' }}
-          name: Apply SQL Format Changes
+        - name: Apply SQL Format Changes
+          if: ${{ github.event_name == 'pull_request' }}
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
             commit_message: "Reformat SQL Files to common format"
