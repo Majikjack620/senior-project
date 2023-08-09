@@ -59,7 +59,7 @@ jobs:
         - name: Check SQL Format
           uses: yoheikikuta/sql-autoformat-action@v1.0.2
           with:
-            ${{ secrets.github_token }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #   Semantic-Release:
 #     runs-on: ubuntu-latest
