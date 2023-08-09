@@ -34,16 +34,16 @@ A git tag is a lightweight, permanent label that is attached to a specific point
 
 Semantic-release is a lightweight way of using commit messages to update the tag number. The only requirement to use this system is that we stick to a standardized way of making commits for now this follows the [default angular commit syntax](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit-message-header). Please note that the `[type]: your message` is required but the `(scope)` is no longer included in our version. This can be changed if we decide this is wanted.
 
-`
+```
 Commit Message Header
 <type>: <short summary>
-  │           │
-  │           └─⫸ Summary in present tense. Not capitalized. No period at the end.                                                  
-  │                          
+  │       │
+  │       └─⫸ Summary in present tense. Not capitalized. No period at the end.                                                                        
   │
   └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
-The <type> and <summary> fields are mandatory.
-`
+
+Both fields are mandatory for the commit.
+```
 
 ### Type
 Must be one of the following:
