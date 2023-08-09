@@ -25,18 +25,13 @@ jobs:
           uses: datadog/action-py-black-formatter@v2.1
           id: action_black
           
-        - if: steps.action_black.outputs.is_formatted == 'true'
-          name: Create PR if formatting errors
-          uses: peter-evans/create-pull-request@v3
+        - if: ${{ steps.action_black.outputs.is_formatted == 'true' && github.event_name == 'pull_request' }}
+          name: Apply Python Format Changes in PR
+          uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            title: "Format Python Code with psf/black for Clearer Readability"
-            commit-message: ":art: Formatting Python code with psf/black" 
-            body: |
-              "There appear to be some python formatting errors in ${{ github.sha }}. 
-              Uses the [psf/black](https://github.com/psf/black) formatter to fix these issues."
-            base: ${{ github.head_ref }}
-            branch: actions/black_formatter
+            commit_message: "Reformat Python Files to common format"
+            file_pattern: "*.py"
+            skip_dirty_check: false
           
         - name: Share Changes
           if: steps.action_black.outputs.is_formatted == 'true'
@@ -53,7 +48,7 @@ jobs:
         - name: Check SQL Format
           uses: credfeto/action-sql-format@v1.4.1
           
-        - name: Apply SQL Format Changes
+        - name: Apply SQL Format Changes in PR
           if: ${{ github.event_name == 'pull_request' }}
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
