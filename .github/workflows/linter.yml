@@ -78,7 +78,7 @@ jobs:
         
         - name: Run commitlint
           run: |
-            COMMITS=$(npx commitlint --from=HEAD~1)
+            COMMITS=$(npx commitlint --from=HEAD^1)
             echo "$COMMITS" >> $GITHUB_SUMMARY
 
     Python-Tester:
