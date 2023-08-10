@@ -35,7 +35,7 @@ jobs:
           
         - if: ${{ steps.action_black.outputs.is_formatted == 'true' && github.event_name == 'pull_request' }}
           name: Share Changes
-          run: gh pr comment -b "CI Action: :art: Reformatted Python files for generalized convention"
+          run: gh pr comment -b "[CI Action] Reformatted Python files for generalized convention"
             
     SQL-Formatter:
       runs-on: ubuntu-latest
