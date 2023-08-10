@@ -47,7 +47,9 @@ with open("dependent.txt", "r") as depend:
         )
         print("  - ***npm install {DEPENDENCY_NAME}@{VERSION}***")
 
-        print("### Updating **ALL** Dependencies **(not recommended, will update dependencies with major updates)**:")
+        print(
+            "### Updating **ALL** Dependencies **(not recommended, will update dependencies with major updates)**:"
+        )
         print(
             """- Ensure that ALL dependencies in the ***package.json*** file has a
     '***^***' in front of the version number (i.e. ***"@aws-sdk/client-dynamodb": "^3.351.0"***"""
@@ -65,9 +67,13 @@ with open("dependent.txt", "r") as depend:
     print("##")
 
     # Check for major updates
-    if 'Major' in content:
-        print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
+    if "Major" in content:
+        print(
+            "#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:"
+        )
 
     # Check for minor updates
-    if 'Minor' in content:
-        print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
+    if "Minor" in content:
+        print(
+            "#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:"
+        )
