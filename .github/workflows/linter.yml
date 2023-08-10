@@ -80,8 +80,7 @@ jobs:
         
         - name: Run commitlint
           run: |
-            COMMITS=$(npx commitlint --from=HEAD^1)
-            echo "$COMMITS" >> $GITHUB_SUMMARY
+            npx commitlint --from=HEAD^1
 
     Python-Tester:
       runs-on: ubuntu-latest
