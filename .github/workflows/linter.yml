@@ -64,6 +64,23 @@ jobs:
 #             PR_URL: ${{ github.event.pull_request.html_url }}
 #             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    Python-Tester:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v3
+
+        - name: Setup Python with version ${{ matrix.python-version }}
+          uses: actions/setup-python@v4
+          with:
+            python-version: ${{ matrix.python-version }}
+        - run: |
+            pip install --upgrade
+            pip install pytest pytest-md
+
     Sonar-Analysis:
           runs-on: ubuntu-latest
           steps:
