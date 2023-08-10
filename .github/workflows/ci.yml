@@ -36,6 +36,7 @@ jobs:
           run: gh pr comment "$PR_URL" -b "[CI Action] Python files reformatted for generalized convention"
           env:
             PR_URL: ${{ github.event.pull_request.html_url }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
     SQL-Formatter:
       runs-on: ubuntu-latest
@@ -60,6 +61,7 @@ jobs:
           run: gh pr comment "$PR_URL" -b "[CI Action] SQL files reformatted for generalized convention"
           env:
             PR_URL: ${{ github.event.pull_request.html_url }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
         
           
