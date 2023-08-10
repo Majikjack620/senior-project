@@ -1,4 +1,4 @@
-name: CI
+name: Format Code
 
 on:
   pull_request:
@@ -63,36 +63,6 @@ jobs:
 #           env:
 #             PR_URL: ${{ github.event.pull_request.html_url }}
 #             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
-        
-          
-
-    Semantic-Release:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Repo
-          uses: actions/checkout@v3
-
-        - name: Semantic Release
-          uses: cycjimmy/semantic-release-action@v3
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-    Sonar-Analysis:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Repo
-          uses: actions/checkout@v3
-
-        - name: SonarCloud Analysis
-          uses: SonarSource/sonarcloud-github-action@master
-          env:
-            GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          with:
-            args:
-              -Dsonar.projectKey=Majikjack620_senior-project
-              -Dsonar.organization=majikjack620
 
 
 
