@@ -5,9 +5,9 @@ on:
     branches: main
     
 permissions:
-  pull-requests: read
-  contents: read
-  issues: read
+  contents: write
+  checks: write
+  issues: write
 
 jobs:       
     Semantic-Release:
