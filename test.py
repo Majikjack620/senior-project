@@ -1,13 +1,15 @@
-import os
-import re
-import sys
+testing = ["apple", "banana", "orange", "hot dog", "lettuce", "ham", "cheddar"]
+for x in testing:
+    print(f"{x} is a food")
 
-print sys.path
+five = 5
+six = 6
+eleven = five + six
 
-print {"some_key": "lol"}
+print(f"{five} + {six} = {eleven}")
 
-print "a really really super duper long crazy line that goes beyond what is recommended at 80 characters and all of that jazz yay yay yay"
+not_used = "hello"
 
-
-def some_func():
-    bob = "an unused variable"
+print(
+    "making a super super super super super long string to get past 80 characters while testing the Black Python Formatter."
+)
