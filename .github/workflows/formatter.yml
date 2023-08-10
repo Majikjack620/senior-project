@@ -2,7 +2,7 @@ name: Format Code
 
 on:
   pull_request:
-    branches: [main, master]
+    branches: [master, development]
     types: [opened, reopened, labeled, synchronize]
   workflow_dispatch:
     
@@ -27,7 +27,7 @@ jobs:
           if: ${{ steps.format_python.outputs.is_formatted == 'true' }}
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "fix: :snake::art: Python Files reformatted to generalize convention"
+            commit_message: "refactor: :snake::art: Python Files reformatted to generalize convention"
             file_pattern: "*.py"
             skip_dirty_check: false
           id: apply_py_changes
@@ -52,7 +52,7 @@ jobs:
         - name: Apply SQL Format Changes in PR
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "fix: :chart_with_upwards_trend::art: SQL Files reformatted to generalize convention"
+            commit_message: "refactor: :chart_with_upwards_trend::art: SQL Files reformatted to generalize convention"
             file_pattern: "*.sql"
             skip_dirty_check: false
           id: apply_sql_changes
