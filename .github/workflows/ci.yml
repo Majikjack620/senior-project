@@ -1,8 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: main
   pull_request:
     branches: [main, master]
     types: [opened, reopened, labeled, synchronize]
@@ -15,29 +13,30 @@ permissions:
   issues: write
   
 jobs:
-    Black-Formatter:
+    Python-Formatter:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout Repo
           uses: actions/checkout@v3
         
-        - name: Black Formatter Review
+        - name: Python Format Review with Black
           uses: datadog/action-py-black-formatter@v2.1
-          id: action_black
+          id: format_python
           
-        - if: ${{ steps.action_black.outputs.is_formatted == 'true' && github.event_name == 'pull_request' }}
-          name: Apply Python Format Changes in PR
+        - name: Apply Python Format Changes in PR
+          if: ${{ steps.format_python.outputs.is_formatted == 'true' }}
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "Reformat Python Files to common format"
+            commit_message: ":snake::art: Python Files Reformatted to common format"
             file_pattern: "*.py"
             skip_dirty_check: false
           
-        - name: Share Changes
-          if: steps.action_black.outputs.is_formatted == 'true'
-          uses: reviewdog/action-suggester@v1
-          with:
-            tool_name: blkfmt
+        - name: Comment Changes
+          if: ${{ steps.format_python.outputs.is_formatted == 'true' }}
+          run: gh pr comment "$PR_URL" -b "[CI Action] Python files reformatted for generalized convention"
+          env:
+            PR_URL: ${{ github.event.pull_request.html_url }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
     SQL-Formatter:
       runs-on: ubuntu-latest
@@ -45,16 +44,26 @@ jobs:
         - name: Checkout Repo
           uses: actions/checkout@v3
             
-        - name: Check SQL Format
+        - name: SQL Format Review with sqlparse.format
           uses: credfeto/action-sql-format@v1.4.1
+          id: format_sql
           
         - name: Apply SQL Format Changes in PR
-          if: ${{ github.event_name == 'pull_request' }}
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "Reformat SQL Files to common format"
+            commit_message: ":chart_with_upwards_trend::art: SQL Files reformatted to common format"
             file_pattern: "*.sql"
             skip_dirty_check: false
+          id: apply_sql_changes
+            
+        - name: Comment Changes
+          if: ${{ steps.apply_sql_changes.outputs.changes_detected == 'true'  }}
+          run: gh pr comment "$PR_URL" -b "[CI Action] SQL files reformatted for generalized convention"
+          env:
+            PR_URL: ${{ github.event.pull_request.html_url }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
+        
           
 
     Semantic-Release:
