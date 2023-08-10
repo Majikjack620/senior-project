@@ -27,17 +27,17 @@ jobs:
           if: ${{ steps.format_python.outputs.is_formatted == 'true' }}
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "Python Files Reformatted to common format"
+            commit_message: ":snake::art: Python Files Reformatted to common format"
             file_pattern: "*.py"
             skip_dirty_check: false
           id: apply_py_changes
           
-        - name: Comment Changes
-          if: ${{ steps.apply_py_changes.outputs.changes_detected == 'true' }}
-          run: gh pr comment "$PR_URL" -b "\:\snake\:\\:\art\:\ Python files reformatted for generalized convention"
-          env:
-            PR_URL: ${{ github.event.pull_request.html_url }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         - name: Comment Changes
+#           if: ${{ steps.apply_py_changes.outputs.changes_detected == 'true' }}
+#           run: gh pr comment "$PR_URL" -b "Python files reformatted for generalized convention"
+#           env:
+#             PR_URL: ${{ github.event.pull_request.html_url }}
+#             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
     SQL-Formatter:
       runs-on: ubuntu-latest
@@ -52,17 +52,17 @@ jobs:
         - name: Apply SQL Format Changes in PR
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "SQL Files reformatted to common format"
+            commit_message: ":chart_with_upwards_trend::art: SQL Files reformatted to common format"
             file_pattern: "*.sql"
             skip_dirty_check: false
           id: apply_sql_changes
             
-        - name: Comment Changes
-          if: ${{ steps.apply_sql_changes.outputs.changes_detected == 'true'  }}
-          run: gh pr comment "$PR_URL" -b "\:\chart_with_upwards_trend\:\\:\art\:\ SQL files reformatted for generalized convention"
-          env:
-            PR_URL: ${{ github.event.pull_request.html_url }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         - name: Comment Changes
+#           if: ${{ steps.apply_sql_changes.outputs.changes_detected == 'true'  }}
+#           run: gh pr comment "$PR_URL" -b "SQL files reformatted for generalized convention"
+#           env:
+#             PR_URL: ${{ github.event.pull_request.html_url }}
+#             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
         
           
