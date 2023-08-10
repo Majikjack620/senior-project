@@ -68,8 +68,12 @@ with open("dependent.txt", "r") as depend:
 
     # Check for major updates
     if "Major" in content:
-        print("#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:")
+        print(
+            "#### :warning: MAJOR DEPENDENCY UPDATE(S): Make sure to check the dependency docs before updating :warning:"
+        )
 
     # Check for minor updates
     if "Minor" in content:
-        print("#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:")
+        print(
+            "#### :x: MINOR DEPENDENCY UPDATE(S): Update these dependencies, otherwise the check will keep failing :x:"
+        )
