@@ -50,7 +50,7 @@ jobs:
         - name: Apply SQL Format Changes in PR
           run: echo "$OUTPUT"
           env:
-            OUTPUT: ${{ steps.action_sql.outputs.* }}
+            OUTPUT: ${{ steps.action_sql.* }}
 #           if: ${{ steps.action_sql.outputs. == 'pull_request' }}
 #           uses: stefanzweifel/git-auto-commit-action@v4.16.0
 #           with:
