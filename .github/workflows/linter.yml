@@ -68,7 +68,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy:
         matrix:
-          python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+          python-version: ["3.7", "3.8", "3.9", "3.10"]
       steps:
         - name: Checkout Repo
           uses: actions/checkout@v3
@@ -78,7 +78,7 @@ jobs:
           with:
             python-version: ${{ matrix.python-version }}
         - run: |
-            pip install --upgrade
+            pip install --upgrade pip
             pip install pytest pytest-md
 
     Sonar-Analysis:
