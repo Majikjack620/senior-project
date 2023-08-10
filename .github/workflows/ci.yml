@@ -63,7 +63,7 @@ jobs:
         - name: test
           run: echo "$OUTPUT"
           env:
-            OUTPUT: ${{ steps.action_sql }}
+            OUTPUT: ${{ steps }}
             
         
           
