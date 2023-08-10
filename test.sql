@@ -11,7 +11,4 @@ CREATE OR REPLACE FUNCTION public.f_epoch_to_datetime(epoch int8) RETURNS timest
 	from datetime import datetime
 	return datetime.fromtimestamp(epoch // 1000)
 
-$$ ;
-
-
-DELETE TABLE hello_world
+$$;
