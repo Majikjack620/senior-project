@@ -80,6 +80,13 @@ jobs:
         - run: |
             pip install --upgrade pip
             pip install pytest pytest-md
+            
+        - name: Test Python Code using PyTest
+          uses: pavelzw/pytest-action@v2
+          with:
+            emoji: false
+            custom-arguments: '-q'
+            report-title: 'Python Test Report'
 
     Sonar-Analysis:
           runs-on: ubuntu-latest
