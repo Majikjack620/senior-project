@@ -9,26 +9,9 @@ permissions:
   contents: read
   issues: read
 
-jobs:
-    Sonar-Analysis:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Repo
-          uses: actions/checkout@v3
-
-        - name: SonarCloud Analysis
-          uses: SonarSource/sonarcloud-github-action@master
-          env:
-            GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          with:
-            args:
-              -Dsonar.projectKey=Majikjack620_senior-project
-              -Dsonar.organization=majikjack620
-              
+jobs:       
     Semantic-Release:
       runs-on: ubuntu-latest
-      needs: Sonar-Analysis
       steps:
         - name: Checkout Repo
           uses: actions/checkout@v3
