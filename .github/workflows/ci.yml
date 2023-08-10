@@ -1,8 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: main
   pull_request:
     branches: [main, master]
     types: [opened, reopened, labeled, synchronize]
@@ -25,17 +23,17 @@ jobs:
           uses: datadog/action-py-black-formatter@v2.1
           id: action_black
           
-        - if: ${{ steps.action_black.outputs.is_formatted == 'true' && github.event_name == 'pull_request' }}
+        - if: ${{ steps.action_black.outputs.is_formatted == 'true' }}
           name: Apply Python Format Changes in PR
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: ":art: Reformat Python Files to common format"
+            commit_message: ":snake::art: Python Files Reformatted to common format"
             file_pattern: "*.py"
             skip_dirty_check: false
           
-        - if: ${{ steps.action_black.outputs.is_formatted == 'true' && github.event_name == 'pull_request' }}
+        - if: ${{ steps.action_black.outputs.is_formatted == 'true' }}
           name: Share Changes
-          run: gh pr comment -b "[CI Action] Reformatted Python files for generalized convention"
+          run: gh pr comment -b "[CI Action] Python files reformatted for generalized convention"
             
     SQL-Formatter:
       runs-on: ubuntu-latest
@@ -48,17 +46,16 @@ jobs:
           id: action_sql
           
         - name: Apply SQL Format Changes in PR
-          run: echo "$OUTPUT"
-          env:
-            OUTPUT: ${{ steps.action_sql }}
-#           if: ${{ steps.action_sql.outputs. == 'pull_request' }}
-#           uses: stefanzweifel/git-auto-commit-action@v4.16.0
-#           with:
-#             commit_message: ":art: Reformat SQL Files to common format"
-#             file_pattern: "*.sql"
-#             skip_dirty_check: false
+          if: ${{ steps.action_sql.outputs.changes_detected == 'true' }}
+          uses: stefanzweifel/git-auto-commit-action@v4.16.0
+          with:
+            commit_message: ":chart_with_upwards_trend::art: SQL Files reformatted to common format"
+            file_pattern: "*.sql"
+            skip_dirty_check: false
             
-#         - if: ${{ github.event_name == 'pull_request' &&  }}
+        - if: ${{ steps.action_sql.outputs.changes_detected == 'true'  }}
+          name: Share Changes
+          run: gh pr comment "[CI Action] SQL files reformatted for generalized convention"
             
         
           
