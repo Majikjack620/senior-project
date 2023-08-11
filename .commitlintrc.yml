@@ -2,7 +2,7 @@ extends:
   # - '@commitlint/config-lerna-scopes'
   - '@commitlint/config-conventional'
 rules:
-  header-max-length: [1, 'always', 80]
+  header-max-length: [1, 'always', 90]
   type-enum:
     - 2
     - always
