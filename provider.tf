@@ -1,4 +1,4 @@
-# Configure the Azure Provider
+  # Configure the Azure Provider
 provider "azurerm" {
   version = "= 2.37.0"
   skip_provider_registration = true
