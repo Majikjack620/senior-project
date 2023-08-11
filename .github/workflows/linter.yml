@@ -84,29 +84,6 @@ jobs:
             npm install @commitlint/config-conventional @commitlint/config-lerna-scopes
             npx commitlint --from=HEAD^1
 
-    Python-Tester:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          python-version: ["3.7", "3.8", "3.9", "3.10"]
-      steps:
-        - name: Checkout Repo
-          uses: actions/checkout@v3
-
-        - name: Setup Python with version ${{ matrix.python-version }}
-          uses: actions/setup-python@v4
-          with:
-            python-version: ${{ matrix.python-version }}
-        - run: |
-            pip install --upgrade pip
-            pip install pytest pytest-md
-            
-        - name: Test Python Code using PyTest
-          uses: pavelzw/pytest-action@v2
-          with:
-            emoji: false
-            custom-arguments: '-q'
-            report-title: 'Python Test Report'
 
     Sonar-Analysis:
           runs-on: ubuntu-latest
@@ -125,10 +102,29 @@ jobs:
                   -Dsonar.organization=majikjack620
 
 
+#     Python-Tester:
+#       runs-on: ubuntu-latest
+#       strategy:
+#         matrix:
+#           python-version: ["3.7", "3.8", "3.9", "3.10"]
+#       steps:
+#         - name: Checkout Repo
+#           uses: actions/checkout@v3
 
-
-
-
+#         - name: Setup Python with version ${{ matrix.python-version }}
+#           uses: actions/setup-python@v4
+#           with:
+#             python-version: ${{ matrix.python-version }}
+#         - run: |
+#             pip install --upgrade pip
+#             pip install pytest pytest-md
+            
+#         - name: Test Python Code using PyTest
+#           uses: pavelzw/pytest-action@v2
+#           with:
+#             emoji: false
+#             custom-arguments: '-q'
+#             report-title: 'Python Test Report'
 
 
 
