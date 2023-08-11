@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-  type        = string
+  type = string
   description = "Name of the resource group where resources are to be deployed"
 }
 
@@ -9,22 +9,22 @@ variable "alert_email_address" {
 }
 
 variable "name_prefix" {
-  type        = string
+  type = string
   description = "Name prefix to use for resources that need to be created (only lowercase characters and hyphens allowed)"
-  default     = "azure-app-example--"
+  default = "azure-app-example--"
 }
 
 variable "app_service_name" {
-  type        = string
+  type = string
   description = "Name for the app service"
-  default     = "appservice"
+  default = "appservice"
 }
 
 # https://www.terraform.io/docs/providers/azurerm/r/application_insights.html#application_type
 variable "app_insights_app_type" {
-  type        = string
+  type  = string
   description = "The type of Application Insights to create."
-  default     = "other"
+  default = "other"
 }
 
 # https://azure.microsoft.com/en-gb/pricing/details/app-service/linux/
