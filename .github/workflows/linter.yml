@@ -93,7 +93,7 @@ jobs:
               if [[ $FILE == *.tf ]]; then
                 FORMAT=$(terraform fmt -recursive $FILE)
 
-                if [[ $FORMAT != ""  ]]
+                if [[ $FORMAT != ""  ]]; then
                   echo "Format modified for: $FILE - will now be visible in PR commits"
                 fi
               fi
