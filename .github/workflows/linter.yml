@@ -27,7 +27,7 @@ jobs:
           if: ${{ steps.format_python.outputs.is_formatted == 'true' }}
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "refactor: :snake::art: Python Files reformatted to generalize convention"
+            commit_message: "refactor: :snake::art: Python files reformatted to generalize convention"
             file_pattern: "*.py"
             skip_dirty_check: false
           id: apply_py_changes
@@ -53,7 +53,7 @@ jobs:
         - name: Apply SQL Format Changes in PR
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "refactor: :chart_with_upwards_trend::art: SQL Files reformatted to generalize convention"
+            commit_message: "refactor: :chart_with_upwards_trend::art: SQL files reformatted to generalize convention"
             file_pattern: "*.sql"
             skip_dirty_check: false
           id: apply_sql_changes
@@ -88,20 +88,22 @@ jobs:
             set +e
 
             for FILE in ${{ steps.modified_files.outputs.added_modified }}; do
-              echo "Checking terraform fmt on ${FILE}..."
 
               if [[ $FILE == *.tf ]]; then
                 FORMAT=$(terraform fmt -recursive $FILE)
+                
+                echo "Checking terraform fmt on ${FILE}..."
 
-                if [[ $FORMAT != ""  ]]
+                if [[ $FORMAT != ""  ]]; then
                   echo "Format modified for: $FILE - will now be visible in PR commits"
+                fi
               fi
             done
             
         - name: Apply Terraform Changes in PR
           uses: stefanzweifel/git-auto-commit-action@v4.16.0
           with:
-            commit_message: "refactor: :chart_with_upwards_trend::art: SQL Files reformatted to generalize convention"
+            commit_message: "refactor: :mount_fuji::art: TF files reformatted with `terraform fmt`"
             file_pattern: "*.tf"
             skip_dirty_check: false
           id: apply_tf_changes
