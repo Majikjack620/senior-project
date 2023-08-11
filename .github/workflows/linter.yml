@@ -39,6 +39,7 @@ jobs:
 #             PR_URL: ${{ github.event.pull_request.html_url }}
 #             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
+
     SQL-Formatter:
       runs-on: ubuntu-latest
       steps:
@@ -56,13 +57,62 @@ jobs:
             file_pattern: "*.sql"
             skip_dirty_check: false
           id: apply_sql_changes
-            
+
 #         - name: Comment Changes
 #           if: ${{ steps.apply_sql_changes.outputs.changes_detected == 'true'  }}
 #           run: gh pr comment "$PR_URL" -b "SQL files reformatted for generalized convention"
 #           env:
 #             PR_URL: ${{ github.event.pull_request.html_url }}
 #             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+    Terraform-Formatter:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v3
+
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v2
+          with:
+            version: 1.2.9
+
+        - name: Fetch Modified Files
+          uses: jitterbit/get-changed-files@v1
+          with:
+              format-delimiter: 'space-delimited'
+          id: modified_files
+
+        - name: Terraform Format Review with terraform fmt
+          run: |
+            set +e
+
+            for FILE in ${{ steps.modified_files.outputs.added_modified }}; do
+              echo "Checking terraform fmt on ${FILE}..."
+
+              if [[ $FILE == *.tf ]]; then
+                FORMAT=$(terraform fmt -recursive $FILE)
+
+                if [[ $FORMAT != ""  ]]
+                  echo "Format modified for: $FILE - will now be visible in PR commits"
+              fi
+            done
+            
+        - name: Apply Terraform Changes in PR
+          uses: stefanzweifel/git-auto-commit-action@v4.16.0
+          with:
+            commit_message: "refactor: :chart_with_upwards_trend::art: SQL Files reformatted to generalize convention"
+            file_pattern: "*.tf"
+            skip_dirty_check: false
+          id: apply_tf_changes
+            
+        # - name: Comment Changes
+        #   if: ${{ steps.apply_tf_changes.outputs.changes_detected == 'true'  }}
+        #   run: gh pr comment "$PR_URL" -b "Terraform files reformatted for generalized convention"
+        #   env:
+        #     PR_URL: ${{ github.event.pull_request.html_url }}
+        #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
     Commit-Linter:
       runs-on: ubuntu-latest
@@ -84,21 +134,21 @@ jobs:
             npx commitlint --from=HEAD^1
 
 
-    Sonar-Analysis:
-          runs-on: ubuntu-latest
-          steps:
-            - name: Checkout Repo
-              uses: actions/checkout@v3
+    # Sonar-Analysis:
+    #       runs-on: ubuntu-latest
+    #       steps:
+    #         - name: Checkout Repo
+    #           uses: actions/checkout@v3
 
-            - name: SonarCloud Analysis
-              uses: SonarSource/sonarcloud-github-action@master
-              env:
-                GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
-                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-              with:
-                args:
-                  -Dsonar.projectKey=Majikjack620_senior-project
-                  -Dsonar.organization=majikjack620
+    #         - name: SonarCloud Analysis
+    #           uses: SonarSource/sonarcloud-github-action@master
+    #           env:
+    #             GITHUB_TOKEN: ${{ secrets.TOKENIZED }}
+    #             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #           with:
+    #             args:
+    #               -Dsonar.projectKey=Majikjack620_senior-project
+    #               -Dsonar.organization=majikjack620
 
 
 #     Python-Tester:
