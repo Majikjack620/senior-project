@@ -14,4 +14,6 @@ print(
     "making a super super super super super long string to get past 80 characters while testing the Black Python Formatter."
 )
 
-print("making a super super super super super long string to get past 80 characters while testing the Black Python Formatter.")
+print(
+    "making a super super super super super long string to get past 80 characters while testing the Black Python Formatter."
+)
