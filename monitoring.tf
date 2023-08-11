@@ -4,9 +4,9 @@ locals {
 
 # Action group to send an email for alerts
 resource "azurerm_monitor_action_group" "current" {
-  name                = "SendAlertEmail"
+  name = "SendAlertEmail"
   resource_group_name = data.azurerm_resource_group.current.name
-  short_name          = "Alert"
+  short_name = "Alert"
 
   email_receiver {
     name          = "sendtoemail"
@@ -16,9 +16,9 @@ resource "azurerm_monitor_action_group" "current" {
 
 # Availability ping
 resource "azurerm_application_insights_web_test" "app_availability" {
-  name                    = "availability-${azurerm_app_service.current.name}"
-  resource_group_name     = data.azurerm_resource_group.current.name
-  location                = data.azurerm_resource_group.current.location
+  name = "availability-${azurerm_app_service.current.name}"
+  resource_group_name = data.azurerm_resource_group.current.name
+  location = data.azurerm_resource_group.current.location
   application_insights_id = azurerm_application_insights.current.id
   kind                    = "ping"
   frequency               = 300
@@ -86,10 +86,10 @@ resource "azurerm_monitor_metric_alert" "ms_5xx_errors" {
 
   criteria {
     metric_namespace = "Microsoft.Web/sites"
-    metric_name      = "Http5xx"
-    aggregation      = "Total"
-    operator         = "GreaterThan"
-    threshold        = 0
+    metric_name = "Http5xx"
+    aggregation = "Total"
+    operator = "GreaterThan"
+    threshold = 0
   }
 
   action {
@@ -99,11 +99,11 @@ resource "azurerm_monitor_metric_alert" "ms_5xx_errors" {
 
 # Dependency failures (e.g. HTTP request to another service or database query failed)
 resource "azurerm_monitor_scheduled_query_rules_alert" "dependency_failures_in_app_service" {
-  name                = "${azurerm_app_service.current.name} had dependency failures"
+  name = "${azurerm_app_service.current.name} had dependency failures"
   resource_group_name = data.azurerm_resource_group.current.name
-  location            = data.azurerm_resource_group.current.location
+  location = data.azurerm_resource_group.current.location
   data_source_id      = azurerm_application_insights.current.id
-  frequency           = 15
+  frequency = 15
   time_window         = 15
   # Error
   severity = 1
