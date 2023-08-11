@@ -11,3 +11,4 @@ output "app_service_url" {
 output "container_registry" {
   value = azurerm_container_registry.current.login_server
 }
+# Comment here
