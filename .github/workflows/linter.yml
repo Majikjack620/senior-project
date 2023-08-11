@@ -95,6 +95,7 @@ jobs:
 
                 if [[ $FORMAT != ""  ]]
                   echo "Format modified for: $FILE - will now be visible in PR commits"
+                fi
               fi
             done
             
