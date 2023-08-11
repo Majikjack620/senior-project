@@ -131,7 +131,6 @@ jobs:
         
         - name: Run commitlint
           run: |
-            npm install
             npm install @commitlint/config-conventional @commitlint/config-lerna-scopes
             npx commitlint --from=HEAD^1
 
