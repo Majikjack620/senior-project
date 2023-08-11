@@ -16,8 +16,8 @@ locals {
 }
 
 resource "azurerm_key_vault" "current" {
-  name                = local.key_vault_name
-  location            = data.azurerm_resource_group.current.location
+  name = local.key_vault_name
+  location = data.azurerm_resource_group.current.location
   resource_group_name = data.azurerm_resource_group.current.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
 
