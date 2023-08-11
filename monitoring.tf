@@ -102,9 +102,9 @@ resource "azurerm_monitor_scheduled_query_rules_alert" "dependency_failures_in_a
   name = "${azurerm_app_service.current.name} had dependency failures"
   resource_group_name = data.azurerm_resource_group.current.name
   location = data.azurerm_resource_group.current.location
-  data_source_id      = azurerm_application_insights.current.id
+  data_source_id = azurerm_application_insights.current.id
   frequency = 15
-  time_window         = 15
+  time_window = 15
   # Error
   severity = 1
   query    = <<-QUERY
